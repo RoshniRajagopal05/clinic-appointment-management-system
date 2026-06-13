@@ -75,3 +75,56 @@ class Doctor(models.Model):
         return (
             f'{self.doctor_id} - {self.name}'
         )
+        
+        
+        
+class DoctorAvailability(models.Model):
+
+    DAY_CHOICES = (
+        ('MONDAY', 'Monday'),
+        ('TUESDAY', 'Tuesday'),
+        ('WEDNESDAY', 'Wednesday'),
+        ('THURSDAY', 'Thursday'),
+        ('FRIDAY', 'Friday'),
+        ('SATURDAY', 'Saturday'),
+        ('SUNDAY', 'Sunday'),
+    )
+
+    doctor = models.ForeignKey(
+        Doctor,
+        on_delete=models.CASCADE
+    )
+
+    working_day = models.CharField(
+        max_length=20,
+        choices=DAY_CHOICES
+    )
+
+    start_time = models.TimeField()
+
+    end_time = models.TimeField()
+
+    def __str__(self):
+
+        return (
+            f'{self.doctor.name} - {self.working_day}'
+        )        
+
+
+
+class DoctorLeave(models.Model):
+
+    doctor = models.ForeignKey(
+        Doctor,
+        on_delete=models.CASCADE
+    )
+
+    leave_date = models.DateField()
+
+    reason = models.TextField()
+
+    def __str__(self):
+
+        return (
+            f'{self.doctor.name} - {self.leave_date}'
+        )        

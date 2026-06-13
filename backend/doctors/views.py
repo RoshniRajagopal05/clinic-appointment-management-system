@@ -9,6 +9,19 @@ from rest_framework.generics import (
 
 from doctors.models import Doctor
 
+from doctors.models import (
+    DoctorAvailability,
+    DoctorLeave
+)
+
+from doctors.serializers.availability_serializer import (
+    DoctorAvailabilitySerializer
+)
+
+from doctors.serializers.leave_serializer import (
+    DoctorLeaveSerializer
+)
+
 from doctors.serializers.doctor_serializer import (
     DoctorSerializer
 )
@@ -58,4 +71,79 @@ class DoctorDetailView(
 
     queryset = (
         Doctor.objects.all()
+    )
+    
+    
+    from doctors.models import (
+    DoctorAvailability,
+    DoctorLeave
+)
+
+
+
+class DoctorAvailabilityListCreateView(
+    ListCreateAPIView
+):
+
+    permission_classes = [
+        IsAdmin
+    ]
+
+    serializer_class = (
+        DoctorAvailabilitySerializer
+    )
+
+    queryset = (
+        DoctorAvailability.objects.all()
+    )
+    
+    
+class DoctorAvailabilityDetailView(
+    RetrieveUpdateDestroyAPIView
+):
+
+    permission_classes = [
+        IsAdmin
+    ]
+
+    serializer_class = (
+        DoctorAvailabilitySerializer
+    )
+
+    queryset = (
+        DoctorAvailability.objects.all()
+    )
+    
+    
+class DoctorLeaveListCreateView(
+    ListCreateAPIView
+):
+
+    permission_classes = [
+        IsAdmin
+    ]
+
+    serializer_class = (
+        DoctorLeaveSerializer
+    )
+
+    queryset = (
+        DoctorLeave.objects.all()
+    )        
+
+
+class DoctorLeaveDetailView(
+    RetrieveUpdateDestroyAPIView
+):
+
+    permission_classes = [
+        IsAdmin
+    ]
+
+    serializer_class = (
+        DoctorLeaveSerializer
+    )
+
+    queryset = (
+        DoctorLeave.objects.all()
     )
