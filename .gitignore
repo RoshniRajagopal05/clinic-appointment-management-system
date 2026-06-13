@@ -1,0 +1,47 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual Environment
+venv/
+env/
+
+# Django
+db.sqlite3
+*.log
+media/
+
+# Environment Variables
+.env
+
+# VS Code
+.vscode/
+
+# OS Files
+.DS_Store
+Thumbs.db
+
+# Python Packaging
+build/
+dist/
+*.egg-info/
+
+# Node Modules
+node_modules/
+
+# React Build
+frontend/build/
+
+# Coverage
+.coverage
+htmlcov/
+
+# MySQL Dumps
+*.sql
+
+# Pytest
+.pytest_cache/
+
+# Migrations Cache
+*.pyc
