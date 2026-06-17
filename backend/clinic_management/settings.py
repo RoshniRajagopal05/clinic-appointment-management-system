@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'notifications',
     'settings_app',
     'django_filters',
+    'dashboard',
     
 ]
 
