@@ -15,6 +15,9 @@ from accounts.permissions import (
     IsAdminOrReceptionist
 )
 
+from django_filters.rest_framework import (
+    DjangoFilterBackend
+)
 
 class AppointmentListCreateView(
     ListCreateAPIView
@@ -32,6 +35,15 @@ class AppointmentListCreateView(
         Appointment.objects.all()
     )
 
+    filter_backends = [
+        DjangoFilterBackend
+    ]
+
+    filterset_fields = [
+        'doctor',
+        'status',
+        'appointment_date'
+    ]
 
 class AppointmentDetailView(
     RetrieveUpdateDestroyAPIView

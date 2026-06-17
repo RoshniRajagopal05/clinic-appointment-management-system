@@ -12,13 +12,35 @@ from doctors.models import (
 
 class AppointmentSerializer(
     serializers.ModelSerializer
+    
 ):
 
+    patient_name = serializers.CharField(
+    source='patient.name',
+    read_only=True
+)
+
+    doctor_name = serializers.CharField(
+    source='doctor.name',
+    read_only=True
+)
+    
+    
     class Meta:
 
         model = Appointment
 
-        fields = '__all__'
+        fields = [
+    'id',
+    'appointment_date',
+    'appointment_time',
+    'reason',
+    'status',
+    'patient',
+    'patient_name',
+    'doctor',
+    'doctor_name'
+]
 
     def validate(self, data):
 
