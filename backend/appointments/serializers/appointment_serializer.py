@@ -9,6 +9,9 @@ from doctors.models import (
     DoctorLeave
 )
 
+from django.core.mail import send_mail
+from django.conf import settings
+
 
 class AppointmentSerializer(
     serializers.ModelSerializer
@@ -141,3 +144,36 @@ class AppointmentSerializer(
             )
 
         return data
+    
+    def create(self, validated_data):
+
+        appointment = Appointment.objects.create(
+            **validated_data
+        )
+
+        patient = appointment.patient
+
+        doctor = appointment.doctor
+
+        send_mail(
+            subject='Appointment Confirmation',
+
+            message=(
+                f'Hello {patient.name},\n\n'
+                f'Your appointment has been booked successfully.\n\n'
+                f'Doctor: {doctor.name}\n'
+                f'Date: {appointment.appointment_date}\n'
+                f'Time: {appointment.appointment_time}\n\n'
+                f'Thank you.'
+            ),
+
+            from_email=settings.DEFAULT_FROM_EMAIL,
+
+            recipient_list=[
+                patient.email
+            ],
+
+            fail_silently=False
+        )
+
+        return appointment

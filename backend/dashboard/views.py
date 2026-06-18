@@ -13,6 +13,7 @@ from doctors.models import (
 )
 
 from appointments.models import Appointment
+from django.core.mail import send_mail
 
 
 class DashboardView(APIView):
@@ -133,3 +134,21 @@ class DashboardView(APIView):
         }
 
         return Response(data)
+    
+class TestEmailView(APIView):
+
+    permission_classes = [IsAdmin]
+
+    def get(self, request):
+
+        send_mail(
+            subject='Clinic Appointment Test',
+            message='Mailtrap is working successfully.',
+            from_email='clinic@example.com',
+            recipient_list=['test@example.com'],
+            fail_silently=False
+        )
+
+        return Response({
+            'message': 'Email sent successfully'
+        })    
